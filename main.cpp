@@ -28,7 +28,7 @@ using namespace std;
 int queue_processor(nfq_q_handle *CrtHandle, nfgenmsg *nfmsg,
                      nfq_data *packet_handler, void *data)
 {
-    uint32_t pktLen, dataLen; // IP+TCP+HTTP, HTTP
+    uint32_t pktLen; // IP+TCP+HTTP, HTTP
     int id;
     uint8_t* packet;
     IP* ipHeader;
