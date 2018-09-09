@@ -18,6 +18,7 @@ public:
     }
     uint16_t search(char* word);
     bool replace(char* target_word, char* your_word);
+    uint16_t SetTCPCheckSum();
 };
 
 #endif // MYTOOLS_H

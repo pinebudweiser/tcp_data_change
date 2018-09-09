@@ -52,11 +52,11 @@ int queue_processor(nfq_q_handle *CrtHandle, nfgenmsg *nfmsg,
         {
             binTool.init((uint8_t*)tcpHeader + (tcpHeader->th_off << 2),
                          pktLen-(ipHeader->ip_hl << 2)-(tcpHeader->th_off << 2)); // arg1 = index of data, arg2 = HTTP data size.
+            printf("binTool.SetTCPCheckSum()1 = %x\n", binTool.SetTCPCheckSum());
+            tcpHeader->th_sum -= ntohs(binTool.SetTCPCheckSum());
             result = binTool.search("hacking");
-            if(result)
-            {
-                printf("index of hacking : %d\n", result);
-            }
+            printf("binTool.SetTCPCheckSum()2 = %x\n", binTool.SetTCPCheckSum());
+            tcpHeader->th_sum += ntohs((binTool.SetTCPCheckSum()));
         }
     }
     return nfq_set_verdict(CrtHandle, id, NF_ACCEPT, pktLen, packet);
